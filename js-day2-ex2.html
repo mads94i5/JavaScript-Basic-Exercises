@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day-2 Exercise-2</title>
+    <style>
+        .my-div {width: 25px; height: 25px;background-color:red; margin:1px;}
+      </style>
+     
+</head>
+<body>
+    <h2>JS Week5, day2-Exercise 2</h2>
+    <div id="outer">
+        <div id="box1" class="my-div"></div>
+        <div id="box2" class="my-div"></div>
+        <div id="box3" class="my-div"></div>
+        <div id="box4" class="my-div"></div>
+        <div id="box5" class="my-div"></div>
+        <div id="box6" class="my-div"></div>
+        <div id="box7" class="my-div"></div>
+        <div id="box8" class="my-div"></div>
+        <div id="box9" class="my-div"></div>
+        <div id="box10" class="my-div"></div>
+    </div>
+    <p id="output"></p>
+    <button><a href="index.html">Back</a></button>
+
+    
+<script>
+    var outerDiv = document.getElementById("outer");
+
+    outerDiv.addEventListener("click", function(e) {
+        
+      var divId = e.target.id;
+
+      var output = document.getElementById("output");
+      console.log("Hi from " + divId)
+      output.innerText = "Hi from " + divId;
+    });
+</script>
+</body>
+</html>

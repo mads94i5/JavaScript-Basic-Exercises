@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day-2 Exercise-4</title>
+     
+</head>
+<body>
+    <h2>JS Week5, day2-Exercise 4</h2>
+    <table>
+        <thead id="hdr">
+            <tr id="hdrs">
+                <th>ID</th>
+                <th id="hdr-year"><a href="#"></a>Year</a></th>
+                <th id="hdr-make"><a href="#">Make</a></th>
+                <th id="hdr-model"><a href="#"></a>Model</a></th>
+                <th id="hdr-price"><a href="#"></a>Price</a></th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <div>
+        <label for="filter">Price &nbsp;</label><input id="filter">
+        <button id="btn-filter">Filter price less than</button>
+        <button id="btn-clear">Clear</button>
+    </div>
+    <button><a href="index.html">Back</a></button>
+
+    
+<script>
+    const cars = [
+      { id: 1, year: 1997, make: 'Ford', model: 'E350', price: 3000 },
+      { id: 2, year: 1999, make: 'Chevy', model: 'Venture', price: 4900 },
+      { id: 3, year: 2000, make: 'Chevy', model: 'Venture', price: 5000 },
+      { id: 4, year: 1996, make: 'Jeep', model: 'Grand Cherokee', price: 4799 },
+      { id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799 }
+    ];
+    
+    function createTable(carsMap) {
+        const tableRows = carsMap.map(car => `
+            <tr>
+                <td>${car.id}</td>
+                <td>${car.year}</td>
+                <td>${car.make}</td>
+                <td>${car.model}</td>
+                <td>${car.price}</td>
+            </tr>
+            `).join("\n")
+        document.getElementById("tbody").innerHTML = tableRows
+    }
+    createTable(cars)
+
+    document.getElementById("btn-filter").onclick = () => {
+        const price = document.getElementById("filter").value
+        const filteredCars = cars.filter(car => car.price < price)
+        createTable(filteredCars)
+    }    
+
+    document.getElementById("btn-clear").onclick = function () {
+        createTable(cars)
+    }
+
+    let sortMake = 1
+    document.getElementById("hdrs").addEventListener("click", function(event) {
+        const columnId = event.target.id;
+        let column;
+  
+        switch (columnId) {
+            case "hdr-year":
+                column = "year";
+                break;
+            case "hdr-make":
+                column = "make";
+                break;
+            case "hdr-model":
+                column = "model";
+                break;
+            case "hdr-price":
+                column = "price";
+                break;
+            default:
+                break;
+        }
+  
+        if (column) {
+            const sortedCars = cars.sort((a, b) => {
+            let sortResult = 0;
+            if (a[column] < b[column]) sortResult = -1;
+            if (a[column] > b[column]) sortResult = 1;
+            sortResult *= sortMake;
+            return sortResult;
+        });
+        sortMake *= -1;
+        createTable(sortedCars);
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day-2 Exercise-3</title>
+</head>
+<body>
+    <h2>JS Week5, day2-Exercise 3</h2>
+    
+    <ul id="my-ul"></ul>
+
+    <form>
+        <input id="name-input">
+        <button id="btn-add">Add Name</button>
+        <button id="btn-rm-first">Remove First</button>
+        <button id="btn-rm-last">Remove Last</button>
+    </form>
+
+    <button><a href="index.html">Back</a></button>
+
+    
+<script>
+    const names = ["Mads", "Niels", "Børge", "Henning"]
+
+    function createList() {
+        const ul = document.getElementById("my-ul")
+        ul.innerHTML = ""
+        names.forEach(name => {
+            const li = document.createElement("li")
+            li.textContent = name
+            ul.appendChild(li)
+        })
+    }
+    createList()
+
+    document.getElementById(btn-add).onclick = (event) => {
+        event.preventDefault()
+        const input = document.getElementById("name-input")
+        const newName = DOMPurify.sanitize(input.value.trim())
+        names.push(newName)
+        createList()
+    }
+    document.getElementById("btn-rm-first").onclick = (event) => {
+        event.preventDefault()
+        names.shift()
+        createList()
+    }
+    document.getElementById("btn-rm-last").onclick = (event) => {
+        event.preventDefault()
+        names.pop()
+        createList()
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day-2 Exercise-1</title>
+</head>
+<body>
+    <h2>JS Week5, day2-Exercise 1</h2>
+    <div id="box1" style="width: 100px;margin: 1px;">&nbsp;</div>
+    <div id="box2" style="width: 100px;margin: 1px;">&nbsp;</div>
+    <div id="box3" style="width: 100px;margin: 1px;">&nbsp;</div>
+    <button id="randomize-btn">Randomize colors</button>
+    <button><a href="index.html">Back</a></button>
+    
+<script>
+    function getRandomColor() {
+        var r = Math.floor(Math.random() * 256)
+        var g = Math.floor(Math.random() * 256)
+        var b = Math.floor(Math.random() * 256)
+
+        var hexColor = "#" + r.toString(16) + g.toString(16) + b.toString(16)
+
+        return hexColor
+    }
+
+    function setRandomColors() {
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.backgroundColor = getRandomColor()
+        }
+    }
+
+    var randomizeBtn = document.getElementById("randomize-btn")
+    let divs = document.querySelectorAll("div")
+    setRandomColors()
+
+    randomizeBtn.addEventListener("click", function() {
+        
+      var randomColor = getRandomColor()
+
+      setRandomColors()
+    });
+    
+</script>
+</body>
+</html>

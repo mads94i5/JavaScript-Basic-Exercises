@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day-3 Exercise-1</title>
+</head>
+<body>
+
+    <div style="margin-left:10%;width:78%;margin-right:auto ; font-family: sans-serif;">
+        <h2>JS Week5, day3-Exercise 1</h2>
+    <h3>First fetch (GET only) demo</h3>
+    <p>MAKE SURE to open developer tools in your browser and monitor the request/responses made "underneath the surface"</p>
+    <input id="input-id" type="text" placeholder="Enter id" />&nbsp
+    <button id="btn-get-user">Get user</button>
+    <button id="btn-get-all">Get all</button>
+
+    <div id="all-user-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div id="single-user-content">
+      <h3>Details</h3>
+      <p id="p-name"></p>
+      <p id="p-email"></p>
+      <p id="p-city"></p>
+      <p id="p-error" style="color:red"></p>
+    </div>
+    <div style="margin-top: 1em;">
+        <button><a href="index.html">Back</a></button>
+  </div>
+  </div>
+
+ <script>
+    const URL = "https://jsonplaceholder.typicode.com/users/"
+
+    const getUserBtn = document.getElementById("btn-get-user")
+    
+    getUserBtn.onclick = fetchUserPromise
+
+    const getAllBtn = document.getElementById("btn-get-all").onclick = fetchAllUsers
+
+    function fetchAllUsers(event) {
+        document.getElementById("p-error").innerText = ""
+        fetch(URL)
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.status + " - No users found.")
+            }
+            return res.json()})
+            .then(data => {
+                const users = data.map(user => `
+                <tr>
+                    <td>${user.name}</td>
+                    <td>${user.phone}</td>
+                </tr>
+                `).join("")
+                document.getElementById("tbody").innerHTML = users
+            })
+            .catch((error) => {
+                document.getElementById("p-error").innerText = error
+            })
+        
+    }
+
+    function fetchUserPromise(event) {
+        document.getElementById("p-error").innerText = ""
+        const id = document.getElementById("input-id").value
+        if (!id) {
+            document.getElementById("p-error").innerText = "Enter an id"
+        } else {
+            fetch(URL+id)
+            .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.status + " - User not found.")
+            }
+            return res.json()})
+            .then(data => {
+                document.getElementById("p-name").innerText = data.name
+                document.getElementById("p-email").innerText = data.email
+                document.getElementById("p-city").innerText = data.address.city
+            })
+            .catch((error) => {
+                document.getElementById("p-error").innerText = error
+            })
+        }
+    }
+
+
+    /*
+    function fetchUserOld(event) {
+        const id = document.getElementById("input-id").value
+        const response = fetch(URL + id)
+        const data = response.then(res => res.json())
+        data.then(user => {
+            console.log(user)
+        })
+    }
+    */
+</script>
+
+</body>
+</html>
