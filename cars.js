@@ -1,3 +1,5 @@
+// OBS: Burde skiftes med online hosting link af back-end API, men det er sparet væk.
+
 const URL = "http://localhost:8080/api/cars"
 
 // Find a single car
